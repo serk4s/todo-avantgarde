@@ -1,0 +1,102 @@
+// src/scss/_variables.scss
+
+// ------------------------------------
+// 1. Theme Variables (Темная тема - Авангард)
+// ------------------------------------
+$color-bg-primary-dark: #111111;
+$color-bg-secondary-dark: #1a1a1a;
+$color-text-primary-dark: #a0a0a0;
+$color-text-secondary-dark: #555555;
+$color-accent-dark: #a0a0a0;
+$color-border-dark: #333333;
+$color-checkbox-border-dark: #a0a0a0;
+$color-grid-dark: #1d1d1d; // Цвет клеточки для темной темы
+
+// ------------------------------------
+// 2. Theme Variables (Светлая тема)
+// ------------------------------------
+$color-bg-primary-light: #eeeeee;
+$color-bg-secondary-light: #ffffff;
+$color-text-primary-light: #333333;
+$color-text-secondary-light: #999999;
+$color-accent-light: #333333;
+$color-border-light: #cccccc;
+$color-checkbox-border-light: #333333; // Увеличенный контраст
+$color-grid-light: #e0e0e0; // Цвет клеточки для светлой темы
+
+// ------------------------------------
+// 3. Structural Variables
+// ------------------------------------
+$border-width: 2px;
+$transition-speed: 0.3s;
+$grid-size: 20px; // Размер одной клеточки
+$grid-line-width: 1px; // Толщина линии клеточки
+
+// ------------------------------------
+// 4. Mixin for Theme Switching (Миксин для организации тем)
+// ------------------------------------
+@mixin apply-theme($bg-primary, $bg-secondary, $text-primary, $text-secondary, $accent, $border, $checkbox-border, $grid-color) {
+  background-color: $bg-primary;
+  color: $text-primary;
+
+  // Паттерн клеточки (применяется ко всему body)
+  background-image:
+          linear-gradient(to right, $grid-color $grid-line-width, transparent $grid-line-width),
+          linear-gradient(to bottom, $grid-color $grid-line-width, transparent $grid-line-width);
+  background-size: $grid-size $grid-size;
+
+
+  .modal-content {
+    background-color: $bg-secondary; // Фон модалки - вторичный
+    border-color: $accent;
+  }
+
+  // Вторичный фон для полей и элементов списка
+  .task-list-item, .task-form-input {
+    background-color: $bg-secondary;
+  }
+
+  // Границы
+  .task-list-item, .task-form-input, .btn-primary {
+    border: $border-width solid $border;
+  }
+
+  .task-list-item:hover {
+    border-color: $accent;
+  }
+
+  .btn-primary {
+    background-color: $bg-secondary;
+    color: $text-primary;
+
+    &:hover {
+      background-color: $accent;
+      color: $bg-primary;
+    }
+  }
+
+  .btn-icon {
+    color: $text-secondary;
+    &:hover {
+      color: $text-primary;
+    }
+  }
+
+  .task-completed {
+    background-color: $bg-secondary;
+    .task-text {
+      color: $text-secondary;
+    }
+  }
+
+  .custom-checkbox {
+    border-color: $checkbox-border;
+    &:checked {
+      background-color: $text-primary;
+      border-color: $text-primary;
+      &::after {
+        border-color: $bg-primary;
+      }
+    }
+  }
+}

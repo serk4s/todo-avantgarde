@@ -1,0 +1,12 @@
+// src/scss/main.scss
+
+// 1. Tailwind Directives
+@tailwind base;
+@tailwind components;
+
+// 2. Custom SCSS Imports
+@import 'variables';
+@import 'components';
+
+// 3. Tailwind Utilities
+@tailwind utilities;

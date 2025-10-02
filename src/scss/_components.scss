@@ -1,0 +1,115 @@
+// src/scss/_components.scss
+
+// ------------------------------------
+// Base Styling and Theme Application
+// ------------------------------------
+
+// Применяем transition к body для плавного переключения темы
+body {
+  transition: background-color $transition-speed, color $transition-speed;
+
+  // Темная тема (по умолчанию)
+  &[data-theme="dark"] {
+    // Вызов миксина с передачей всех переменных для темной темы
+    @include apply-theme(
+                    $color-bg-primary-dark,
+                    $color-bg-secondary-dark,
+                    $color-text-primary-dark,
+                    $color-text-secondary-dark,
+                    $color-accent-dark,
+                    $color-border-dark,
+                    $color-checkbox-border-dark,
+                    $color-grid-dark
+    );
+  }
+
+  // Светлая тема
+  &[data-theme="light"] {
+    // Вызов миксина с передачей всех переменных для светлой темы
+    @include apply-theme(
+                    $color-bg-primary-light,
+                    $color-bg-secondary-light,
+                    $color-text-primary-light,
+                    $color-text-secondary-light,
+                    $color-accent-light,
+                    $color-border-light,
+                    $color-checkbox-border-light,
+                    $color-grid-light
+    );
+  }
+}
+
+// ------------------------------------
+// Component Styles (Грубые формы / Авангард)
+// ------------------------------------
+
+.task-list-item {
+  @apply flex items-center justify-between transition-all duration-300;
+  // Границы и скругление задаются в миксине, здесь только общие стили
+}
+
+.task-list-item, .task-form-input, .btn-primary {
+  border-radius: 0; // Авангардные, грубые формы
+  transition: border-color $transition-speed, background-color $transition-speed, opacity $transition-speed;
+}
+
+// Применение Tailwind-классов для семантического класса
+.task-form-input {
+  @apply p-3 text-sm focus:ring-0 focus:outline-none;
+}
+
+.btn-primary {
+  @apply p-4 font-semibold uppercase;
+}
+
+// Стиль для выполненных задач
+.task-completed {
+  @apply opacity-40;
+}
+
+.modal {
+  // Темный, полупрозрачный фон модального окна
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.modal-content {
+  // Используем Tailwind для центрирования и теней
+  @apply w-full max-w-md p-6 shadow-xl;
+  border-width: $border-width; // Используем SCSS-переменную для толщины рамки
+  border-style: solid;
+  border-radius: 0;
+}
+
+.lucide-icon {
+  stroke-width: $border-width; // Грубые линии для иконок
+}
+
+// ------------------------------------
+// Custom Checkbox
+// ------------------------------------
+.custom-checkbox {
+  // Стиль border-color задается в миксине apply-theme
+  appearance: none; // Скрываем нативный чекбокс
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  margin-right: 12px;
+  border-style: solid;
+  border-width: $border-width; // Используем SCSS-переменную
+}
+
+// Стиль "галочки"
+.custom-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 1px;
+  width: 4px;
+  height: 10px;
+  border: solid;
+  // Толщина линии галочки соответствует толщине бордера
+  border-width: 0 $border-width $border-width 0;
+  transform: rotate(45deg);
+}

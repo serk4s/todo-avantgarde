@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторная работа №4: To-Do List (Avant-garde)</title>
+    <link rel="stylesheet" href="dist/css/main.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body data-theme="dark" class="min-h-screen p-4 md:p-8">
+
+<main class="max-w-xl mx-auto">
+    <header class="mb-8 p-1 border-b-2 border-b-current">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-1 tracking-wider uppercase text-center md:text-left">TO-DO</h1>
+    </header>
+
+    <section class="flex flex-col md:flex-row gap-4 mb-8">
+        <input type="text" id="search-input" placeholder="Поиск задачи по названию..."
+               class="task-form-input w-full"
+               oninput="window.handleSearch()">
+
+        <button id="theme-toggle" class="btn-primary flex-shrink-0 w-full md:w-auto flex items-center justify-center gap-2">
+            <i data-lucide="sun-moon" class="w-5 h-5 lucide-icon"></i>
+            <span class="theme-text">Светлая Тема</span>
+        </button>
+    </section>
+
+    <ul id="task-list" class="space-y-4 mb-8">
+    </ul>
+
+    <button id="add-task-btn" class="btn-primary w-full text-lg shadow-lg">
+        Добавить Новую Задачу
+    </button>
+</main>
+
+<div id="task-modal" class="modal fixed inset-0 hidden items-center justify-center p-4 z-50">
+    <div class="modal-content w-full max-w-md p-6 shadow-xl">
+        <h2 id="modal-title" class="text-2xl font-bold mb-4">Создать Задачу</h2>
+        <form id="task-form">
+            <input type="hidden" id="task-id">
+            <input type="text" id="task-text" required
+                   placeholder="Название задачи"
+                   class="task-form-input mb-4 w-full"
+                   maxlength="100">
+
+            <div class="flex justify-end space-x-3">
+                <button type="button" id="cancel-modal-btn" class="btn-icon p-3 text-sm">Отмена</button>
+                <button type="submit" class="btn-primary p-3 text-sm" id="save-task-btn">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="src/js/app.js"></script>
+<script>
+    // Инициализация Lucide icons после загрузки DOM
+    window.onload = () => {
+        lucide.createIcons();
+        // Вызываем глобальную функцию инициализации из app.js
+        window.initApp();
+    };
+</script>
+</body>
+</html>
